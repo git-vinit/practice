@@ -1,0 +1,237 @@
+package com.combocheckbox;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class combo_checkbox {
+
+	public static void main(String[] args) {
+
+			WebDriverManager.edgedriver().setup();
+		
+			EdgeOptions options = new EdgeOptions();
+			EdgeDriver driver = new EdgeDriver(options);
+			
+			driver.get( combo_checkbox.class.getResource("/combobox/combo.html").toString());
+			driver.manage().window().maximize();
+			
+			List<WebElement> Number_of_checkbox = driver.findElements(By.xpath("//select/option"));
+			
+			
+			System.out.println(" --> " + Number_of_checkbox.size() + ("Checkbox Found") );
+			
+			for(int i =0; i < Number_of_checkbox.size(); i+=2)
+		
+			{
+				Number_of_checkbox.get(i).click();
+			}
+			
+				int Checked, unchecked;
+				boolean result;
+				Checked = unchecked = 0;
+				
+				for (int i = 0; i < Number_of_checkbox.size(); i++)
+				{
+					result =  Number_of_checkbox.get(i).isSelected();
+					System.out.println("-->" + "(" + (i + 1) + ")" + Number_of_checkbox.get(i).getAttribute("value").toString() + "-" + result + "\n");
+					if (result)
+					{
+						Checked++;
+					}
+					else {
+						unchecked++;
+					}
+					
+					System.out.println("total no. of checkbox " +Checked);
+					System.out.println("total no. of uncheckbox " +unchecked);
+						
+
+	}
+
+	}
+}
+
+
+
+
+
+package checkbox;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+//import webobject.WebSelenium;
+import io.github.bonigarcia.wdm.managers.EdgeDriverManager;
+
+public class Checkbox {
+
+	public static void main(String[] args) {
+		EdgeDriverManager.edgedriver().setup();
+	
+		EdgeOptions options = new EdgeOptions();
+		EdgeDriver driver = new EdgeDriver(options);
+		
+		driver.get(Checkbox.class.getResource("/Shivam/Checkbox.html").toString());
+		driver.manage().window().maximize();
+		
+		List<WebElement>Number_of_checkbox=driver.findElements(By.xpath("//Input[@type = 'checkbox']"));
+		
+		
+		System.out.println("--> " + Number_of_checkbox.size() + ("Checkbox Found"));
+		
+		for(int i =0 ; i < Number_of_checkbox.size(); i+=1)
+	
+		{
+			Number_of_checkbox.get(i).click();
+		}
+		
+			int Checked, unchecked;
+			boolean result;
+			Checked = unchecked = 0;
+			
+			for (int i = 0; i < Number_of_checkbox.size(); i++)
+			{
+				result =  Number_of_checkbox.get(i).isSelected();
+				System.out.println("-->" + "(" + (i + 1) + ")" + Number_of_checkbox.get(i).getAttribute("value").toString() + "-" + result + "\n");
+				if (result)
+				{
+					Checked++;
+				}
+				else {
+					unchecked++;
+				}
+				
+				System.out.println("total no. of checkbox " +Checked);
+				System.out.println("total no. of uncheckbox " +unchecked);
+					
+			}	
+	}
+}
+
+
+
+
+package com.object;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+
+import io.github.bonigarcia.wdm.managers.FirefoxDriverManager;
+ 
+public class sfr {
+	public static void main(String[] args)  throws Exception{
+		FirefoxDriverManager.firefoxdriver().setup();
+		FirefoxOptions options = new FirefoxOptions();
+		FirefoxDriver driver = new FirefoxDriver(options);
+		driver.manage().window().maximize();
+		driver.get(sfr.class.getResource("/uuu/shivam3.index.html").toString());
+		List<WebElement>links=driver.findElements(By.tagName("a"));
+	   for(int i = 0; i< links.size(); i++) {
+		   System.out.println((i+1) + links.get(i).getText()+ "\n");
+	   }
+		
+		
+	}
+
+}
+
+
+
+package com.readExcel;
+
+import java.io.File;
+import java.io.FileInputStream;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.Test;
+
+public class ReadExcel {	
+		@Test
+		public void readExcel() 
+				throws Exception{
+		String excelPath = "C:\\Users\\ccsbmt\\eclipse-workspace\\com.readExcel\\Test_Excel\\Text.xlsx";
+		String fileNameString="Text";
+		String sheetName = "Sheet1";
+		
+		File file = new File(excelPath);
+		FileInputStream fis = new FileInputStream(file);
+		
+		XSSFWorkbook wb = new XSSFWorkbook(fis);
+		XSSFSheet sheet = wb.getSheet(sheetName);
+		
+		int rowCount = sheet.getLastRowNum();
+		System.out.println( " Total Row = " + rowCount );
+		
+		String data = sheet.getRow(1).getCell(1).getStringCellValue().toString();
+		System.out.println(data);
+		
+		Row row;
+		for(int i=1; i<=rowCount; i++)
+		{
+			
+			row = sheet.getRow(i);
+			for(int j=1; j<row.getLastCellNum(); j++) 
+			{
+				String data1 = sheet.getRow(i).getCell(j).getStringCellValue().toString();
+				
+				System.out.println( data1 + " " );
+			}
+			
+			System.out.println();
+		}
+		
+	}
+
+}
+
+
+
+
+
+
+
+html file combobox
+
+<html>
+<body>
+<input type="text" id="demo" name="comboboxdemo"/>
+<select name=" optionlist " onChange="combo(this, 'demo')">
+<option>option 1</option>
+<option>option 2</option>
+<option>option 3</option>
+<option> option 4 </option>
+<option> option 5 </option>
+</select>
+</body>
+
+
+
+
+html file for count link objects on html page 
+
+<html>
+<body>
+<h2> To Count Links Present In Webpage</h2>
+<a href = "https://www.google.com">Google</a><br>
+<a href= "https://www.youtube.com">Youtube</a><br>
+</body>
+</html>
+
+
+
